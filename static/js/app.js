@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Обновляем интерфейс с новыми предсказаниями
                 const predictionElement = document.getElementById('predictions');
                 // Убедитесь, что сервер возвращает свойство 'predictions' в JSON
-                predictionElement.textContent = `Next numbers might be: ${data.predictions.join(', ')}`;
+                predictionElement.textContent = `Следующие числа которые могут выпасть: ${data.predictions.join(', ')}`;
             })
             .catch(error => {
                 // Обрабатываем ошибки, если они возникнут
