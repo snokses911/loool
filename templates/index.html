@@ -13,21 +13,10 @@
     <main>
         <section>
             <h2>Введите последнее выпавшее число</h2>
-            <form action="/predict" method="post">
-                <input type="number" name="number" id="last-number" min="0" max="36" required>
-                <!-- Кнопка "Предсказать" удалена, так как отправка формы теперь происходит автоматически -->
-            </form>
+            <input type="number" id="last-number" min="0" max="36" required>
+            <p id="predictions">Enter a number to get predictions.</p>
         </section>
         <section>
-            <h2>Предсказание</h2>
-            {% if predictions %}
-                <p>Следующие числа: {{ predictions|join(', ') }}</p>
-            {% else %}
-                <p>Enter a number to get predictions.</p>
-            {% endif %}
-        </section>
-        <section>
-            <section id="predictions">
             <h2>Стол Рулетки</h2>
             <div class="roulette-table">
                     <!-- Row 1 -->
