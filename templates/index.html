@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Предсказывание Рулетки</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Предсказывание рулетки GTA 5 RP</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Введите последнее выпавшее число</h2>
+            <form action="/predict" method="post">
+                <input type="number" name="number" id="last-number" min="0" max="36" required>
+                <!-- Кнопка "Предсказать" удалена, так как отправка формы теперь происходит автоматически -->
+            </form>
+        </section>
+        <section>
+            <h2>Предсказание</h2>
+            {% if predictions %}
+                <p>Следующие числа: {{ predictions|join(', ') }}</p>
+            {% else %}
+                <p>Enter a number to get predictions.</p>
+            {% endif %}
+        </section>
+        <section>
+            <section id="predictions">
+            <h2>Стол Рулетки</h2>
+            <div class="roulette-table">
+                    <!-- Row 1 -->
+                    <div class="roulette-number green row-1" style="left: 6%;" data-number="00">00</div>
+                    <div class="roulette-number red row-1" style="left: 12%;" data-number="3">3</div>
+                    <div class="roulette-number black row-1" style="left: 18%;" data-number="6">6</div>
+                    <div class="roulette-number red row-1" style="left: 24%;" data-number="9">9</div>
+                    <div class="roulette-number red row-1" style="left: 30%;" data-number="12">12</div>
+                    <div class="roulette-number black row-1" style="left: 37%;" data-number="15">15</div>
+                    <div class="roulette-number red row-1" style="left: 43%;" data-number="18">18</div>
+                    <div class="roulette-number red row-1" style="left: 49%;" data-number="21">21</div>
+                    <div class="roulette-number black row-1" style="left: 55%;" data-number="24">24</div>
+                    <div class="roulette-number red row-1" style="left: 62%;" data-number="27">27</div>
+                    <div class="roulette-number red row-1" style="left: 68%;" data-number="30">30</div>
+                    <div class="roulette-number black row-1" style="left: 74%;" data-number="33">33</div>
+                    <div class="roulette-number red row-1" style="left: 80%;" data-number="36">36</div>
+            
+            
+                    <!-- Row 2 -->
+                    <div class="roulette-number black row-2" style="left: 12%;" data-number="2">2</div>
+                    <div class="roulette-number red row-2" style="left: 18%;" data-number="5">5</div>
+                    <div class="roulette-number black row-2" style="left: 24%;" data-number="8">8</div>
+                    <div class="roulette-number black row-2" style="left: 30%;" data-number="11">11</div>
+                    <div class="roulette-number red row-2" style="left: 37%;" data-number="14">14</div>
+                    <div class="roulette-number black row-2" style="left: 43%;" data-number="17">17</div>
+                    <div class="roulette-number black row-2" style="left: 49%;" data-number="20">20</div>
+                    <div class="roulette-number red row-2" style="left: 55%;" data-number="23">23</div>
+                    <div class="roulette-number black row-2" style="left: 62%;" data-number="26">26</div>
+                    <div class="roulette-number black row-2" style="left: 68%;" data-number="29">29</div>
+                    <div class="roulette-number red row-2" style="left: 74%;" data-number="32">32</div>
+                    <div class="roulette-number black row-2" style="left: 80%;" data-number="35">35</div>
+                    
+            
+                    <!-- Row 3 -->
+                    <div class="roulette-number green row-3" style="left: 6%;" data-number="0">0</div>
+                    <div class="roulette-number red row-3" style="left: 12%;" data-number="1">1</div>
+                    <div class="roulette-number black row-3" style="left: 18%;" data-number="4">4</div>
+                    <div class="roulette-number red row-3" style="left: 24%;" data-number="7">7</div>
+                    <div class="roulette-number black row-3" style="left: 30%;" data-number="10">10</div>
+                    <div class="roulette-number black row-3" style="left: 37%;" data-number="13">13</div>
+                    <div class="roulette-number red row-3" style="left: 43%;" data-number="16">16</div>
+                    <div class="roulette-number red row-3" style="left: 49%;" data-number="19">19</div>
+                    <div class="roulette-number black row-3" style="left: 55%;" data-number="22">22</div>
+                    <div class="roulette-number red row-3" style="left: 62%;" data-number="25">25</div>
+                    <div class="roulette-number black row-3" style="left: 68%;" data-number="28">28</div>
+                    <div class="roulette-number black row-3" style="left: 74%;" data-number="31">31</div>
+                    <div class="roulette-number red row-3" style="left: 80%;" data-number="34">34</div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var rouletteNumbers = document.querySelectorAll('.roulette-number');
+
+            rouletteNumbers.forEach(function (number) {
+                number.addEventListener('click', function () {
+                    var lastNumberInput = document.getElementById('last-number');
+                    lastNumberInput.value = this.dataset.number;
+                    // Отправляем форму автоматически после выбора числа
+                    lastNumberInput.form.submit();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

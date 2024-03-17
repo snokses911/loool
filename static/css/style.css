@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+header {
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+input[type="number"] {
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #004494;
+}
+
+.roulette-table {
+    width: 1000px;
+    height: 300px;
+    border: 2px solid #000;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: #008000;
+    position: relative;
+}
+.roulette-number {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    background-color: #fff;
+    position: absolute;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.red {
+    background-color: red;
+    color: white;
+}
+.black {
+    background-color: black;
+    color: white;
+}
+.green {
+    background-color: green;
+    color: white;
+}
+.row-1 {
+    top: 10%;
+}
+.row-2 {
+    top: 35%;
+}
+.row-3 {
+    top: 60%;
+}
+
+.roulette-number:hover {
+    background-color: #eee;
+}
