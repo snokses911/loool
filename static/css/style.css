@@ -104,6 +104,13 @@ button:hover {
     top: 60%;
 }
 
+@media (max-width: 768px) {
+    .roulette-table {
+      width: 100%; /* Адаптируйте ширину стола под размер экрана */
+      font-size: 12px; /* Уменьшите размер шрифта */
+    }
+
 .roulette-number:hover {
     background-color: #eee;
+}
 }
