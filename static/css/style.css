@@ -37,6 +37,24 @@ button:hover {
     background-color: #004494;
 }
 
+.container {
+    display: flex;
+    flex-wrap: wrap; /* Позволяет элементам переноситься на новую строку */
+    justify-content: center; /* Выравнивание элементов по центру */
+    gap: 10px; /* Расстояние между элементами */
+  }
+  
+  .item {
+    flex: 1 1 200px; /* Разрешает элементу расти и сжиматься, но не меньше 200px */
+  }
+  
+  @media (max-width: 600px) {
+    .container {
+      flex-direction: column; /* Ставит элементы в колонку на экранах меньше 600px */
+    }
+  }
+  
+
 .roulette-table {
     width: 1000px;
     height: 300px;
