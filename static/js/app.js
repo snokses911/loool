@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const rouletteNumbers = document.querySelectorAll('.roulette-number');
 
     // Добавляем каждому числу обработчик события клика
-    rouletteNumbers.forEach(function (numberElement) {
-        numberElement.addEventListener('click', function () {
+    rouletteNumbers.forEach(function (number) {
+        number.addEventListener('click', function () {
             // Получаем значение data-number, которое соответствует выбранному числу
             const selectedNumber = this.getAttribute('data-number');
 

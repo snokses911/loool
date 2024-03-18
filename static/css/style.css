@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
-    background-color: #f4f4f4;
+    background-image: url('/static/images/static-green.png');
 }
 
 header {
@@ -54,63 +54,158 @@ button:hover {
     }
   }
   
-
-.roulette-table {
-    width: 1000px;
-    height: 300px;
-    border: 2px solid #000;
-    border-radius: 10px;
-    padding: 10px;
+  .special-numbers-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    background-color: #008000;
-    position: relative;
+    flex-direction: column;
+    margin-right: 10px; /* Отступ между специальными числами и основной таблицей */
 }
-.roulette-number {
+
+.roulette-number.special {
+    width: 10px; /* Установите желаемую ширину */
+    height: 10px; /* Установите желаемую высоту */
+    text-align: center;
+    border: 1px solid #fff;
+    margin-bottom: 10px; /* Отступ между специальными числами */
+    background-color: green; /* Зеленый фон для специальных чисел */
+    color: white; /* Белый текст */
+}
+
+  .roulette-table-container {
+    width: 96.5vw; /* Ширина составляет 97.5% от ширины окна просмотра */
+    height: 60vh; /* Высота составляет 50% от высоты окна просмотра */
+    background-image: url('/static/images/static-green.png');
+    padding: 20px;
+    border-radius: 15px; /* Скругление углов контейнера */
+  }
+  
+  .roulette-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .roulette-table td {
+    width: 2.7%; /* Уменьшение ширины для учета ячейки '00' */
+  
+    height: 110px;
+    text-align: center;
+    color: white;
+    border: 1px solid #fff;
+    padding: 10px 0; /* Увеличение высоты ячеек */
+  }
+  
+  .green {
+    background-color: #1eaa0bfd; /* Более темный оттенок зеленого для реализма */
+  }
+  
+  .red {
+    background-color: #d40000; /* Насыщенный красный цвет */
+  }
+  
+  .black {
+    background-color: #000;
+  }
+  .hsla {
+    background-color: #aaff9f0c; /* Более темный оттенок зеленого для реализма */
+  }
+  
+  .outside-bets {
+    display: flex;
+    justify-content: space-around; /* Равномерное распределение ставок */
+    margin-top: 10px;
+  }
+  
+  .outside-bets {
+    height: 70px;
+    display: flex;
+    /* Устанавливаем отступы для контейнера, если нужно */
+    padding-left: 220px; /* Больший отступ с левого края */
+    padding-right: 109px; /* Меньший отступ с правого края */
+    margin-top: 10px; /* Верхний отступ без изменений */
+  }
+  
+  .outside-bet {
+    flex-grow: 1;
+    text-align: center;
+    background: hsla(145, 87%, 79%, 0.068);
+    color: #ffffff;
+    line-height: 50px;
+    border: 2px solid #fff;
+    /* Отступы между ставками */
+    margin: 0 2px; /* Если нужно изменить, установите свои значения */
+  }
+  
+  /* Устанавливаем ширину каждой ставки, чтобы они были одинаковыми */
+  .outside-bet {
+    flex: 0 0 calc((100% - 40px) / 3); /* Вычитаем общие отступы между элементами (например, 40px) и делим на 3 */
+  }
+  
+  /* Обнуляем отступы для крайних элементов, если это необходимо */
+  .outside-bets .outside-bet:first-child {
+    margin-left: 0;
+  }
+  
+  .outside-bets .outside-bet:last-child {
+    margin-right: 0;
+  }
+  
+  .outside-gets {
+    height: 70px;
+    display: flex;
+    justify-content: space-around; /* Равномерное распределение ставок */
+    margin-top: 10px;
+  }
+  
+  .outside-gets {
+    display: flex;
+    /* Устанавливаем отступы для контейнера, если нужно */
+    padding-left: 225px; /* Больший отступ с левого края */
+    padding-right: 114px; /* Меньший отступ с правого края */
+    margin-top: 10px; /* Верхний отступ без изменений */
+  }
+  
+  .outside-get {
+    flex-grow: 1;
+    text-align: center;
+    background: hsla(145, 87%, 79%, 0.068);
+    color: #ffffff;
+    line-height: 50px;
+    border: 2px solid #fff;
+    /* Отступы между ставками */
+    margin: 0 2px; /* Если нужно изменить, установите свои значения */
+  }
+  
+  /* Устанавливаем ширину каждой ставки, чтобы они были одинаковыми */
+  .outside-get {
+    flex: 0 0 calc((100% - 40px) / 6); /* Вычитаем общие отступы между элементами (например, 40px) и делим на 3 */
+  }
+  
+  /* Обнуляем отступы для крайних элементов, если это необходимо */
+  .outside-gets .outside-get:first-child {
+    margin-left: 0;
+  }
+  
+  .outside-gets .outside-get:last-child {
+    margin-right: 0;
+  }
+  
+  
+  .diamond {
+    display: inline-block;
     width: 50px;
     height: 50px;
-    border: 2px solid #000;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    background-color: #fff;
-    position: absolute;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-.red {
-    background-color: red;
-    color: white;
-}
-.black {
-    background-color: black;
-    color: white;
-}
-.green {
-    background-color: green;
-    color: white;
-}
-.row-1 {
-    top: 10%;
-}
-.row-2 {
-    top: 35%;
-}
-.row-3 {
-    top: 60%;
-}
-
-@media (max-width: 768px) {
-    .roulette-table {
-      width: 100%; /* Адаптируйте ширину стола под размер экрана */
-      font-size: 12px; /* Уменьшите размер шрифта */
-    }
+    background-size: cover;
+    border-radius: 50%; /* Скругление углов для алмазов */
+  }
+  
+  .red-diamond {
+    background-image: url('/static/images/path-to-red-diamond-image.png');
+  }
+  
+  .black-diamond {
+    background-image: url('/static/images/path-to-black-diamond-image.png');
+  }
+  
 
 .roulette-number:hover {
-    background-color: #00ff15;
-}
+    background-color: #00630500;
 }

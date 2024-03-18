@@ -19,53 +19,73 @@
         </section>
         <section>
             <h2>Стол Рулетки</h2>
-            <div class="roulette-table">
-                    <!-- Row 1 -->
-                    <div class="roulette-number green row-1" style="left: 6%;" data-number="00">00</div>
-                    <div class="roulette-number red row-1" style="left: 12%;" data-number="3">3</div>
-                    <div class="roulette-number black row-1" style="left: 18%;" data-number="6">6</div>
-                    <div class="roulette-number red row-1" style="left: 24%;" data-number="9">9</div>
-                    <div class="roulette-number red row-1" style="left: 30%;" data-number="12">12</div>
-                    <div class="roulette-number black row-1" style="left: 37%;" data-number="15">15</div>
-                    <div class="roulette-number red row-1" style="left: 43%;" data-number="18">18</div>
-                    <div class="roulette-number red row-1" style="left: 49%;" data-number="21">21</div>
-                    <div class="roulette-number black row-1" style="left: 55%;" data-number="24">24</div>
-                    <div class="roulette-number red row-1" style="left: 62%;" data-number="27">27</div>
-                    <div class="roulette-number red row-1" style="left: 68%;" data-number="30">30</div>
-                    <div class="roulette-number black row-1" style="left: 74%;" data-number="33">33</div>
-                    <div class="roulette-number red row-1" style="left: 80%;" data-number="36">36</div>
+            <div class="roulette-table-container">
+
+                <table class="roulette-table">
+                  <tr>  
+                    <td class="roulette-number green" rowspan="3" data-number="0">0</td>
+                    <td class="roulette-number green" rowspan="3" data-number="00">00</td>
+                    <td class="roulette-number red" data-number="3">3</td>
+                    <td class="roulette-number black" data-number="6">6</td>
+                    <td class="roulette-number red" data-number="9">9</td>
+                    <td class="roulette-number red" data-number="12">12</td>
+                    <td class="roulette-number black" data-number="15">15</td>
+                    <td class="roulette-number red" data-number="18">18</td>
+                    <td class="roulette-number red" data-number="21">21</td>
+                    <td class="roulette-number black" data-number="24">24</td>
+                    <td class="roulette-number red" data-number="27">27</td>
+                    <td class="roulette-number red" data-number="30">30</td>
+                    <td class="roulette-number black" data-number="33">33</td>
+                    <td class="roulette-number red" data-number="36">36</td>
+                    <td class="hsla" class="green">3rd</td>
+                  </tr>
+                  <tr>
+
+                    <td class="roulette-number black" data-number="2">2</td>
+                    <td class="roulette-number red" data-number="5">5</td>
+                    <td class="roulette-number black" data-number="8">8</td>
+                    <td class="roulette-number black" data-number="11">11</td>
+                    <td class="roulette-number red" data-number="14">14</td>
+                    <td class="roulette-number black" data-number="17">17</td>
+                    <td class="roulette-number black" data-number="20">20</td>
+                    <td class="roulette-number red" data-number="23">23</td>
+                    <td class="roulette-number black" data-number="26">26</td>
+                    <td class="roulette-number black" data-number="29">29</td>
+                    <td class="roulette-number red" data-number="32">32</td>
+                    <td class="roulette-number black" data-number="35">35</td>
+                    <td class="hsla" class="green">2nd</td>
+                  </tr>
+                  <tr>
+                    <td class="roulette-number red" data-number="1">1</td>
+                    <td class="roulette-number black" data-number="4">4</td>
+                    <td class="roulette-number red" data-number="7">7</td>
+                    <td class="roulette-number black" data-number="10">10</td>
+                    <td class="roulette-number black" data-number="13">13</td>
+                    <td class="roulette-number red" data-number="16">16</td>
+                    <td class="roulette-number red" data-number="19">19</td>
+                    <td class="roulette-number black" data-number="22">22</td>
+                    <td class="roulette-number red" data-number="25">25</td>
+                    <td class="roulette-number black" data-number="28">28</td>
+                    <td class="roulette-number black" data-number="31">31</td>
+                    <td class="roulette-number red" data-number="34">34</td>
+                    <td class="hsla" class="green">1st</td>
+                  </tr>
+                </table>
             
+                <div class="outside-bets">
+                  <div class="outside-bet">1-12</div>
+                  <div class="outside-bet">13-24</div>
+                  <div class="outside-bet">25-36</div>
+                </div>
             
-                    <!-- Row 2 -->
-                    <div class="roulette-number black row-2" style="left: 12%;" data-number="2">2</div>
-                    <div class="roulette-number red row-2" style="left: 18%;" data-number="5">5</div>
-                    <div class="roulette-number black row-2" style="left: 24%;" data-number="8">8</div>
-                    <div class="roulette-number black row-2" style="left: 30%;" data-number="11">11</div>
-                    <div class="roulette-number red row-2" style="left: 37%;" data-number="14">14</div>
-                    <div class="roulette-number black row-2" style="left: 43%;" data-number="17">17</div>
-                    <div class="roulette-number black row-2" style="left: 49%;" data-number="20">20</div>
-                    <div class="roulette-number red row-2" style="left: 55%;" data-number="23">23</div>
-                    <div class="roulette-number black row-2" style="left: 62%;" data-number="26">26</div>
-                    <div class="roulette-number black row-2" style="left: 68%;" data-number="29">29</div>
-                    <div class="roulette-number red row-2" style="left: 74%;" data-number="32">32</div>
-                    <div class="roulette-number black row-2" style="left: 80%;" data-number="35">35</div>
-                    
-            
-                    <!-- Row 3 -->
-                    <div class="roulette-number green row-3" style="left: 6%;" data-number="0">0</div>
-                    <div class="roulette-number red row-3" style="left: 12%;" data-number="1">1</div>
-                    <div class="roulette-number black row-3" style="left: 18%;" data-number="4">4</div>
-                    <div class="roulette-number red row-3" style="left: 24%;" data-number="7">7</div>
-                    <div class="roulette-number black row-3" style="left: 30%;" data-number="10">10</div>
-                    <div class="roulette-number black row-3" style="left: 37%;" data-number="13">13</div>
-                    <div class="roulette-number red row-3" style="left: 43%;" data-number="16">16</div>
-                    <div class="roulette-number red row-3" style="left: 49%;" data-number="19">19</div>
-                    <div class="roulette-number black row-3" style="left: 55%;" data-number="22">22</div>
-                    <div class="roulette-number red row-3" style="left: 62%;" data-number="25">25</div>
-                    <div class="roulette-number black row-3" style="left: 68%;" data-number="28">28</div>
-                    <div class="roulette-number black row-3" style="left: 74%;" data-number="31">31</div>
-                    <div class="roulette-number red row-3" style="left: 80%;" data-number="34">34</div>
-            </div>
+                <div class="outside-gets">
+                  <div class="outside-get">1-18</div>
+                  <div class="outside-get">EVEN</div>
+                  <div class="outside-get red-diamond"></div>
+                  <div class="outside-get black-diamond"></div>
+                  <div class="outside-get">ODD</div>
+                  <div class="outside-get">19-36</div>
+                </div>
         </section>
     </main>
 
