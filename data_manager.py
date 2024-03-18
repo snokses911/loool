@@ -35,6 +35,15 @@ def insert_number(number, username):
     conn.commit()
     conn.close()
 
+def get_all_numbers():
+    """Возвращает список всех чисел из таблицы roulette_numbers."""
+    conn = connect_db()
+    cursor = conn.cursor()
+    cursor.execute('SELECT number FROM roulette_numbers')
+    numbers = cursor.fetchall()
+    conn.close()
+    return [n[0] for n in numbers]
+
 def get_following_numbers(target_number):
     """
     Получает три числа, следующих за последним вхождением указанного числа.
