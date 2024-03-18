@@ -1,4 +1,20 @@
 document.addEventListener('DOMContentLoaded', function () {
+    
+    const numberToColor = {
+        // Красные числа
+        "1": "red", "3": "red", "5": "red", "7": "red", "9": "red",
+        "12": "red", "14": "red", "16": "red", "18": "red", "19": "red",
+        "21": "red", "23": "red", "25": "red", "27": "red", "30": "red",
+        "32": "red", "34": "red", "36": "red",
+        // Чёрные числа
+        "2": "black", "4": "black", "6": "black", "8": "black", "10": "black",
+        "11": "black", "13": "black", "15": "black", "17": "black", "20": "black",
+        "22": "black", "24": "black", "26": "black", "28": "black", "29": "black",
+        "31": "black", "33": "black", "35": "black",
+        // Зелёные числа
+        "0": "green", "00": "green"
+    };
+
     const rouletteNumbers = document.querySelectorAll('.roulette-number');
 
     rouletteNumbers.forEach(function (number) {
@@ -27,10 +43,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 return response.json();
             }) 
+            
+            // Используйте этот маппинг при формировании предсказаний
             .then(data => {
                 predictionElement.innerHTML = ''; // Очистить предыдущие предсказания
                 data.predictions.forEach(prediction => {
-                    const colorClass = prediction.number === '0' || prediction.number === '00' ? 'green' : (parseInt(prediction.number) % 2 === 0 ? 'black' : 'red');
+                    const colorClass = `${numberToColor[prediction.number]}-background`; // Используем маппинг для определения цвета
                     const div = document.createElement('div');
                     div.innerHTML = `<span class="prediction-number ${colorClass}">${prediction.number}</span> с вероятностью <span class="probability">${prediction.probability}</span>`;
                     predictionElement.appendChild(div);

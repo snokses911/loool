@@ -1,7 +1,8 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
+    margin: 5px;
+    padding: 5px;
+    flex-direction: column; /* Делаем основное направление колонны вертикальным */
     background-image: url('/static/images/static-green.png');
 }
 
@@ -10,7 +11,8 @@ header {
 }
 
 h1 {
-    color: #333;
+    color: #31d100;
+    text-align: center; /* Центрируем содержимое */
 }
 
 form {
@@ -18,10 +20,11 @@ form {
 }
 
 input[type="number"] {
-    padding: 8px;
-    margin-right: 10px;
+    padding: 6px;
+    margin-right: 6px;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 20px;
+    text-align: center; /* Центрируем содержимое */
 }
 
 button {
@@ -38,7 +41,7 @@ button:hover {
 }
 
 #loadingIndicator {
-  color: #007bff;
+  color: #ff0000;
   font-weight: bold;
 }
 
@@ -47,11 +50,18 @@ button:hover {
   font-weight: bold;
 }
 
-.prediction-number.green { color: #28a745; }
-.prediction-number.red { color: #dc3545; }
-.prediction-number.black { color: #000000; }
-.probability { font-weight: bold; }
+.prediction-number {
+  display: inline-block;
+  padding: 5px 10px; /* Небольшой отступ вокруг текста */
+  border-radius: 20px; /* Округлённые углы */
+  color: #ffffff; /* Белый цвет текста */
+  font-weight: bold; /* Жирный шрифт для лучшей читаемости */
+  margin: 2px; /* Небольшой отступ между числами */
+}
 
+.green-background { background-color: #28a745; }
+.red-background { background-color: #dc3545; }
+.black-background { background-color: #000000; }
 
 .container {
     display: flex;
@@ -87,7 +97,7 @@ button:hover {
 }
 
   .roulette-table-container {
-    width: 99vw; /* Ширина составляет 97.5% от ширины окна просмотра */
+    width: 85vw; /* Ширина составляет 97.5% от ширины окна просмотра */
     height: 70vh; /* Высота составляет 50% от высоты окна просмотра */
     background-image: url('/static/images/static-green.png');
     padding: 15px;
@@ -95,7 +105,7 @@ button:hover {
   }
   
   .roulette-table {
-    width: 99%;
+    width: 100%;
     border-collapse: collapse;
   }
   
@@ -125,18 +135,18 @@ button:hover {
   }
   
   .outside-bets {
-    height: 30px;
+    height: 35px;
     display: flex;
     justify-content: space-around; /* Равномерное распределение ставок */
     margin-top: 10px;
   }
   
   .outside-bets {
-    height: 15%;
+    height: 4%;
     display: flex; /* Устанавливаем отступы для контейнера, если нужно */
-    padding-left: 40px; /* Больший отступ с левого края */
-    padding-right: 40px; /* Меньший отступ с правого края */
-    margin-top: 10px; /* Верхний отступ без изменений */
+    padding-left: 35px; /* Больший отступ с левого края */
+    padding-right: 35px; /* Меньший отступ с правого края */
+    margin-top: 3px; /* Верхний отступ без изменений */
     text-align: center;
   }
   
@@ -145,7 +155,7 @@ button:hover {
     text-align: center;
     background: hsla(145, 87%, 79%, 0.068);
     color: #ffffff;
-    line-height: 50px;
+    line-height: 20px;
     border: 2px solid #fff;
     /* Отступы между ставками */
     margin: 0 2px; /* Если нужно изменить, установите свои значения */
@@ -166,18 +176,19 @@ button:hover {
   }
   
   .outside-gets {
-    height: 50px;
+    height: 35px;
     display: flex;
     justify-content: space-around; /* Равномерное распределение ставок */
     margin-top: 10px;
   }
   
   .outside-gets {
+    height: 4%;
     display: flex;
     /* Устанавливаем отступы для контейнера, если нужно */
-    padding-left: 40px; /* Больший отступ с левого края */
-    padding-right: 40px; /* Меньший отступ с правого края */
-    margin-top: 10px; /* Верхний отступ без изменений */
+    padding-left: 20px; /* Больший отступ с левого края */
+    padding-right: 20px; /* Меньший отступ с правого края */
+    margin-top: 3px; /* Верхний отступ без изменений */
   }
   
   .outside-get {
@@ -185,7 +196,7 @@ button:hover {
     text-align: center;
     background: hsla(145, 87%, 79%, 0.068);
     color: #ffffff;
-    line-height: 50px;
+    line-height: 20px;
     border: 2px solid #fff;
     /* Отступы между ставками */
     margin: 0 2px; /* Если нужно изменить, установите свои значения */
