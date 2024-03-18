@@ -16,6 +16,8 @@ def index():
 def predict():
     # Получение числа от пользователя
     number = request.form.get('number')
+    # Опционально: получение username, если он передается
+    username = request.form.get('username', 'default_user')
     # Проверка, что number действительно получено и является числом
     if number is not None:
         try:
@@ -23,8 +25,8 @@ def predict():
             number = int(number)
             # Отправляем число в функцию предсказания
             predictions = prediction_engine.predict_next_numbers(number)
-            # Вставляем выбранное число в базу данных
-            insert_number(number)
+            # Вставляем выбранное число в базу данных с username
+            insert_number(number, username)
             # Возвращаем предсказания в формате JSON
             return jsonify(predictions=predictions)
         except ValueError:
