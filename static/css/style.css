@@ -48,7 +48,7 @@ button:hover {
     flex: 1 1 200px; 
   }
   
-  @media (max-width: 600px) {
+  @media (max-width: 800px) {
     .container {
       flex-direction: column; 
     }
@@ -71,22 +71,22 @@ button:hover {
 }
 
   .roulette-table-container {
-    width: 96.5vw; /* Ширина составляет 97.5% от ширины окна просмотра */
-    height: 60vh; /* Высота составляет 50% от высоты окна просмотра */
+    width: 99vw; /* Ширина составляет 97.5% от ширины окна просмотра */
+    height: 70vh; /* Высота составляет 50% от высоты окна просмотра */
     background-image: url('/static/images/static-green.png');
-    padding: 20px;
+    padding: 15px;
     border-radius: 15px; /* Скругление углов контейнера */
   }
   
   .roulette-table {
-    width: 100%;
+    width: 99%;
     border-collapse: collapse;
   }
   
   .roulette-table td {
-    width: 2.7%; /* Уменьшение ширины для учета ячейки '00' */
+    width: 1px; /* Уменьшение ширины для учета ячейки '00' */
   
-    height: 110px;
+    height: 40%;
     text-align: center;
     color: white;
     border: 1px solid #fff;
@@ -109,18 +109,19 @@ button:hover {
   }
   
   .outside-bets {
+    height: 30px;
     display: flex;
     justify-content: space-around; /* Равномерное распределение ставок */
     margin-top: 10px;
   }
   
   .outside-bets {
-    height: 70px;
-    display: flex;
-    /* Устанавливаем отступы для контейнера, если нужно */
-    padding-left: 220px; /* Больший отступ с левого края */
-    padding-right: 109px; /* Меньший отступ с правого края */
+    height: 15%;
+    display: flex; /* Устанавливаем отступы для контейнера, если нужно */
+    padding-left: 40px; /* Больший отступ с левого края */
+    padding-right: 40px; /* Меньший отступ с правого края */
     margin-top: 10px; /* Верхний отступ без изменений */
+    text-align: center;
   }
   
   .outside-bet {
@@ -149,7 +150,7 @@ button:hover {
   }
   
   .outside-gets {
-    height: 70px;
+    height: 50px;
     display: flex;
     justify-content: space-around; /* Равномерное распределение ставок */
     margin-top: 10px;
@@ -158,8 +159,8 @@ button:hover {
   .outside-gets {
     display: flex;
     /* Устанавливаем отступы для контейнера, если нужно */
-    padding-left: 225px; /* Больший отступ с левого края */
-    padding-right: 114px; /* Меньший отступ с правого края */
+    padding-left: 40px; /* Больший отступ с левого края */
+    padding-right: 40px; /* Меньший отступ с правого края */
     margin-top: 10px; /* Верхний отступ без изменений */
   }
   
