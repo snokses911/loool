@@ -25,14 +25,12 @@ def create_table():
     conn.close()
 
 def insert_number(number, username):
-    """
-    Вставляет число, текущее время и имя пользователя в базу данных.
-    """
+    """Вставляет число, текущее время и имя пользователя в базу данных."""
     conn = connect_db()
     cursor = conn.cursor()
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    cursor.execute('INSERT INTO roulette_numbers (number, timestamp, username) VALUES (?, ?, ?)', 
-                   (str(number), timestamp, username))  # Преобразование number в строку для поддержки "00"
+    cursor.execute('INSERT INTO roulette_numbers (number, timestamp, username) VALUES (?, ?, ?)',
+                   (str(number), timestamp, username))
     conn.commit()
     conn.close()
 
@@ -46,16 +44,11 @@ def get_all_numbers():
     return [n[0] for n in numbers]
 
 def get_following_numbers(target_number):
-    """
-    Получает числа, следующих за каждым вхождением указанного числа и анализирует их частоту.
-    """
+    """Получает числа, следующих за каждым вхождением указанного числа."""
     conn = connect_db()
     cursor = conn.cursor()
     cursor.execute('SELECT id FROM roulette_numbers WHERE number = ?', (str(target_number),))
     ids = [id_[0] for id_ in cursor.fetchall()]
-
-    if len(ids) < 3:
-        return ["Мало данных для предсказания."]
 
     following_numbers = []
     for id_ in ids:
@@ -64,9 +57,10 @@ def get_following_numbers(target_number):
         if next_number:
             following_numbers.append(next_number[0])
 
-    most_common_numbers = Counter(following_numbers).most_common(3)
     conn.close()
-    return [num for num, count in most_common_numbers]
+    if not following_numbers:
+        return [], False  # Возвращает пустой список и False, если данных недостаточно
+    return following_numbers, True  # Возвращает список следующих чисел и True, если данных достаточно
 
 if __name__ == "__main__":
     create_table()
