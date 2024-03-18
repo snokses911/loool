@@ -10,14 +10,18 @@ number_to_color = {
 
 def predict_next_numbers(current_number):
     following_numbers = get_following_numbers(current_number)
-    
-    if len(following_numbers) < 3:
-        return ["Мало данных для предсказания."]
-    
-    counter = Counter(following_numbers)
-    most_common = counter.most_common(3)
+    total_counts = sum([count for number, count in Counter(following_numbers).items()])
+    predictions = []
 
-    # Добавляем информацию о цвете к прогнозируемым числам
-    predictions_with_color = [(str(num), number_to_color.get(str(num), "неизвестно")) for num, _ in most_common]
-    
-    return predictions_with_color
+    if total_counts > 0:
+        counter = Counter(following_numbers)
+        num_predictions = 6 if len(following_numbers) >= 6 else 3  # Определяем количество возвращаемых чисел
+        most_common = counter.most_common(num_predictions)
+
+        for num, count in most_common:
+            probability = round((count / total_counts) * 100, 2)  # Вероятность в процентах
+            predictions.append({'number': num, 'probability': f"{probability}%"})
+    else:
+        predictions.append({"number": "Недостаточно данных", "probability": "0%"})
+
+    return predictions

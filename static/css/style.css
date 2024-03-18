@@ -37,6 +37,22 @@ button:hover {
     background-color: #004494;
 }
 
+#loadingIndicator {
+  color: #007bff;
+  font-weight: bold;
+}
+
+#error {
+  color: red;
+  font-weight: bold;
+}
+
+.prediction-number.green { color: #28a745; }
+.prediction-number.red { color: #dc3545; }
+.prediction-number.black { color: #000000; }
+.probability { font-weight: bold; }
+
+
 .container {
     display: flex;
     flex-wrap: wrap; 

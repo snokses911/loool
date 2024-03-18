@@ -1,38 +1,45 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Находим все элементы с классом roulette-number
     const rouletteNumbers = document.querySelectorAll('.roulette-number');
 
-    // Добавляем каждому числу обработчик события клика
     rouletteNumbers.forEach(function (number) {
         number.addEventListener('click', function () {
-            // Получаем значение data-number, которое соответствует выбранному числу
             const selectedNumber = this.getAttribute('data-number');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const errorElement = document.getElementById('error');
+            const predictionElement = document.getElementById('predictions');
 
-            // Отправляем выбранное число на сервер с помощью fetch API
+            // Показываем индикатор загрузки
+            loadingIndicator.style.display = 'block';
+            // Скрываем предыдущие ошибки
+            errorElement.style.display = 'none';
+
             fetch('/predict', {
-                method: 'POST', // Метод HTTP запроса
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
-                    // Дополнительные заголовки могут потребоваться здесь, если у вас настроена CSRF защита
                 },
-                // Кодируем выбранное число как часть тела запроса
                 body: `number=${encodeURIComponent(selectedNumber)}`
             })
             .then(response => {
-                // Проверяем, получен ли корректный ответ
+                loadingIndicator.style.display = 'none'; // Скрываем индикатор загрузки
                 if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
+                    throw new Error('Network response was not ok');
                 }
                 return response.json();
             }) 
             .then(data => {
-                // Обновляем интерфейс с новыми предсказаниями
-                const predictionElement = document.getElementById('predictions');
-                // Убедитесь, что сервер возвращает свойство 'predictions' в JSON
-                predictionElement.textContent = `Следующие числа которые могут выпасть: ${data.predictions.join(', ')}`;
+                predictionElement.innerHTML = ''; // Очистить предыдущие предсказания
+                data.predictions.forEach(prediction => {
+                    const colorClass = prediction.number === '0' || prediction.number === '00' ? 'green' : (parseInt(prediction.number) % 2 === 0 ? 'black' : 'red');
+                    const div = document.createElement('div');
+                    div.innerHTML = `<span class="prediction-number ${colorClass}">${prediction.number}</span> с вероятностью <span class="probability">${prediction.probability}</span>`;
+                    predictionElement.appendChild(div);
+                });
             })
+            
             .catch(error => {
-                // Обрабатываем ошибки, если они возникнут
+                errorElement.style.display = 'block';
+                errorElement.textContent = 'Ошибка: Не удалось получить предсказание.';
                 console.error('Error:', error);
             });
         });
