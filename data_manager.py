@@ -1,5 +1,6 @@
 import sqlite3
 from datetime import datetime
+from collections import Counter
 
 DATABASE_NAME = "roulette_data.db"
 
@@ -46,18 +47,26 @@ def get_all_numbers():
 
 def get_following_numbers(target_number):
     """
-    Получает три числа, следующих за последним вхождением указанного числа.
+    Получает числа, следующих за каждым вхождением указанного числа и анализирует их частоту.
     """
     conn = connect_db()
     cursor = conn.cursor()
-    cursor.execute('''
-        SELECT number FROM roulette_numbers WHERE id > (
-            SELECT id FROM roulette_numbers WHERE number = ? ORDER BY id DESC LIMIT 1
-        ) ORDER BY id ASC LIMIT 3
-    ''', (str(target_number),))  # Преобразование target_number в строку для поддержки "00"
-    numbers = cursor.fetchall()
+    cursor.execute('SELECT id FROM roulette_numbers WHERE number = ?', (str(target_number),))
+    ids = [id_[0] for id_ in cursor.fetchall()]
+
+    if len(ids) < 3:
+        return ["Мало данных для предсказания."]
+
+    following_numbers = []
+    for id_ in ids:
+        cursor.execute('SELECT number FROM roulette_numbers WHERE id > ? ORDER BY id ASC LIMIT 1', (id_,))
+        next_number = cursor.fetchone()
+        if next_number:
+            following_numbers.append(next_number[0])
+
+    most_common_numbers = Counter(following_numbers).most_common(3)
     conn.close()
-    return [n[0] for n in numbers]
+    return [num for num, count in most_common_numbers]
 
 if __name__ == "__main__":
     create_table()
