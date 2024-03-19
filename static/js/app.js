@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     
+    
     const numberToColor = {
         // Красные числа
         "1": "red", "3": "red", "5": "red", "7": "red", "9": "red",
@@ -61,5 +62,28 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('Error:', error);
             });
         });
+    });
+});
+
+// Функция вызывается при нажатии на кнопку "Отменить последнее число"
+function cancelLastEntry() {
+    fetch('/cancel_last_entry', { method: 'POST' })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                // Обновляем значение в поле ввода на удаленное число
+                document.getElementById('last-number').value = data.deleted_number;
+            } else {
+                // Здесь можно обработать ошибку, если нужно, например, вывести сообщение в консоль
+                console.error(data.message);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Устанавливаем обработчик события клика для кнопки "Отменить последний ввод"
+    document.getElementById('cancel-last-entry').addEventListener('click', function() {
+        cancelLastEntry(); // Вызов функции при нажатии на кнопку
     });
 });

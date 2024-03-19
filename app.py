@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 import prediction_engine
-from data_manager import create_table, insert_number, get_all_numbers
+from data_manager import create_table, insert_number, get_all_numbers, delete_last_entry  # Запятая добавлена
 
 app = Flask(__name__)
 
@@ -34,6 +34,12 @@ def predict():
             return jsonify({'error': 'Invalid number format'}), 400
     else:
         return jsonify({'error': 'Number is required'}), 400
+
+@app.route('/cancel_last_entry', methods=['POST'])
+def cancel_last_entry():
+    # Вызов функции для удаления последней записи из базы данных
+    message = delete_last_entry()
+    return jsonify({'message': message})
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -62,5 +62,21 @@ def get_following_numbers(target_number):
         return [], False  # Возвращает пустой список и False, если данных недостаточно
     return following_numbers, True  # Возвращает список следующих чисел и True, если данных достаточно
 
+def delete_last_entry():
+    conn = connect_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, number FROM roulette_numbers ORDER BY id DESC LIMIT 1")
+    last_entry = cursor.fetchone()
+    if last_entry:
+        cursor.execute("DELETE FROM roulette_numbers WHERE id = ?", (last_entry[0],))
+        conn.commit()
+        deleted_number = last_entry[1]
+        conn.close()
+        return {"status": "success", "deleted_number": deleted_number}
+    else:
+        conn.close()
+        return {"status": "error", "message": "No entries to delete."}
+
+
 if __name__ == "__main__":
     create_table()
