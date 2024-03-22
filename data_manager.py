@@ -44,23 +44,27 @@ def get_all_numbers():
     return [n[0] for n in numbers]
 
 def get_following_numbers(target_number):
-    """Получает числа, следующих за каждым вхождением указанного числа."""
+    """Получает числа, следующих за каждым вхождением указанного числа во всей базе данных."""
     conn = connect_db()
     cursor = conn.cursor()
-    cursor.execute('SELECT id FROM roulette_numbers WHERE number = ?', (str(target_number),))
-    ids = [id_[0] for id_ in cursor.fetchall()]
-
-    following_numbers = []
-    for id_ in ids:
-        cursor.execute('SELECT number FROM roulette_numbers WHERE id > ? ORDER BY id ASC LIMIT 1', (id_,))
-        next_number = cursor.fetchone()
-        if next_number:
-            following_numbers.append(next_number[0])
-
+    # Измененный запрос для получения всех следующих чисел после каждого вхождения target_number
+    cursor.execute('''
+        WITH RankedNumbers AS (
+            SELECT number, LEAD(number) OVER (ORDER BY id ASC) AS next_number
+            FROM roulette_numbers
+        )
+        SELECT next_number FROM RankedNumbers
+        WHERE number = ? AND next_number IS NOT NULL
+    ''', (str(target_number),))
+    numbers = cursor.fetchall()
     conn.close()
-    if not following_numbers:
+    # Фильтруем результаты, чтобы исключить возможные None значения
+    filtered_numbers = [num[0] for num in numbers if num[0] is not None]
+
+    if not filtered_numbers:
         return [], False  # Возвращает пустой список и False, если данных недостаточно
-    return following_numbers, True  # Возвращает список следующих чисел и True, если данных достаточно
+    return filtered_numbers, True  # Возвращает список следующих чисел и True, если данных достаточно
+
 
 def delete_last_entry():
     conn = connect_db()
