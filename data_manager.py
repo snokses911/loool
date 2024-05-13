@@ -18,7 +18,7 @@ def create_table():
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             number TEXT NOT NULL,
             timestamp TEXT NOT NULL,
-            username TEXT NOT NULL
+            username TEXT
         );
     ''')
     conn.commit()
@@ -69,14 +69,22 @@ def get_following_numbers(target_number):
 def delete_last_entry():
     conn = connect_db()
     cursor = conn.cursor()
-    cursor.execute("SELECT id, number FROM roulette_numbers ORDER BY id DESC LIMIT 1")
-    last_entry = cursor.fetchone()
-    if last_entry:
-        cursor.execute("DELETE FROM roulette_numbers WHERE id = ?", (last_entry[0],))
+    # Получаем последние две записи
+    cursor.execute("SELECT id, number FROM roulette_numbers ORDER BY id DESC LIMIT 2")
+    last_entries = cursor.fetchall()
+    if last_entries and len(last_entries) == 2:
+        # Удаляем последнюю запись
+        cursor.execute("DELETE FROM roulette_numbers WHERE id = ?", (last_entries[0][0],))
         conn.commit()
-        deleted_number = last_entry[1]
+        previous_number = last_entries[1][1]  # Предпоследнее число
         conn.close()
-        return {"status": "success", "deleted_number": deleted_number}
+        return {"status": "success", "previous_number": previous_number}
+    elif last_entries and len(last_entries) == 1:
+        # Если в базе только одна запись, удаляем её и возвращаем статус без предыдущего числа
+        cursor.execute("DELETE FROM roulette_numbers WHERE id = ?", (last_entries[0][0],))
+        conn.commit()
+        conn.close()
+        return {"status": "success", "message": "Only one entry was found and deleted."}
     else:
         conn.close()
         return {"status": "error", "message": "No entries to delete."}

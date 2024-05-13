@@ -1,3 +1,25 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBsnmMzpDSBXjk2wsW-9fsNovcixivY7RI",
+  authDomain: "rouletpredict.firebaseapp.com",
+  projectId: "rouletpredict",
+  storageBucket: "rouletpredict.appspot.com",
+  messagingSenderId: "659286370144",
+  appId: "1:659286370144:web:6131d123aad2290221a005",
+  measurementId: "G-CJ02Y4R9X6"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
 document.addEventListener('DOMContentLoaded', function () {
     
     
@@ -16,7 +38,10 @@ document.addEventListener('DOMContentLoaded', function () {
         "0": "green", "00": "green"
     };
 
+   
+
     const rouletteNumbers = document.querySelectorAll('.roulette-number');
+    
 
     rouletteNumbers.forEach(function (number) {
         number.addEventListener('click', function () {
@@ -65,14 +90,18 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+ 
+
+
 // Функция вызывается при нажатии на кнопку "Отменить последнее число"
 function cancelLastEntry() {
     fetch('/cancel_last_entry', { method: 'POST' })
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
-                // Обновляем значение в поле ввода на удаленное число
-                document.getElementById('last-number').value = data.deleted_number;
+                // Обновляем значение в поле ввода на предыдущее число
+                // Предполагается, что сервер отправляет предыдущее число в поле 'previous_number'
+                document.getElementById('last-number').value = data.previous_number;
             } else {
                 // Здесь можно обработать ошибку, если нужно, например, вывести сообщение в консоль
                 console.error(data.message);
@@ -80,6 +109,36 @@ function cancelLastEntry() {
         })
         .catch(error => console.error('Error:', error));
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Получаем все элементы вопросов в FAQ
+    var faqQuestions = document.querySelectorAll('.faq-section dt');
+
+    // Добавляем обработчик событий клика к каждому вопросу
+    faqQuestions.forEach(function(question) {
+        question.addEventListener('click', function() {
+            // Переключаем класс 'active', который управляет отображением ответа
+            this.classList.toggle('active');
+            // Получаем следующий элемент в DOM, который должен быть ответом
+            var answer = this.nextElementSibling;
+            // Переключаем отображение ответа
+            if (answer.style.display === 'block') {
+                answer.style.display = 'none';
+            } else {
+                answer.style.display = 'block';
+            }
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const menuButton = document.querySelector('.menu-button');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+
+    menuButton.addEventListener('click', function() {
+        dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
+    });
+});
 
 document.addEventListener('DOMContentLoaded', function() {
     // Устанавливаем обработчик события клика для кнопки "Отменить последний ввод"

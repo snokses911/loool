@@ -34,12 +34,29 @@ def predict():
             return jsonify({'error': 'Invalid number format'}), 400
     else:
         return jsonify({'error': 'Number is required'}), 400
+    
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
+
+@app.route('/settings')
+def settings():
+    return render_template('settings.html')
+
+@app.route('/user_guide')
+def user_guide():
+    return render_template('user_guide.html')
+
+@app.route('/faq')
+def faq():
+    return render_template('faq.html')
 
 @app.route('/cancel_last_entry', methods=['POST'])
 def cancel_last_entry():
-    # Вызов функции для удаления последней записи из базы данных
-    message = delete_last_entry()
-    return jsonify({'message': message})
+    # Вызов функции для удаления последней записи из базы данных и получения предыдущего числа
+    previous_number, message = delete_last_entry()
+    # Возвращаем предыдущее число и сообщение в формате JSON
+    return jsonify({'previous_number': previous_number, 'message': message})
 
 if __name__ == '__main__':
     app.run(debug=True)
