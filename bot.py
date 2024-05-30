@@ -7,7 +7,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 
 # Ваш токен бота, который вы получите у BotFather в Telegram
-TOKEN = '7085725734:AAFdUCaMM8_UCtm7VwcAZmw20r1ZzUyg3ZY'
+TOKEN = 'my token'
 
 def start(update):
     """Отправляет приветственное сообщение и список команд."""
