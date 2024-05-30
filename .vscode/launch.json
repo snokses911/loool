@@ -5,10 +5,11 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "command": "npm start",
-            "name": "Run npm start",
-            "request": "launch",
-            "type": "node-terminal"
+            "name": "Attach to Chrome",
+            "port": 9222,
+            "request": "attach",
+            "type": "chrome",
+            "webRoot": "${workspaceFolder}"
         },
         {
             "name": "Launch Chrome",
@@ -18,11 +19,21 @@
             "webRoot": "${workspaceFolder}"
         },
         {
-            "name": "Отладчик Python: Текущий файл",
+            "name": "Отладчик Python: Flask",
             "type": "debugpy",
             "request": "launch",
-            "program": "${file}",
-            "console": "integratedTerminal"
+            "module": "flask",
+            "env": {
+                "FLASK_APP": "app.py",
+                "FLASK_DEBUG": "1"
+            },
+            "args": [
+                "run",
+                "--no-debugger",
+                "--no-reload"
+            ],
+            "jinja": true,
+            "autoStartBrowser": false
         }
     ]
 }

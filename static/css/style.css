@@ -2,6 +2,8 @@ body {
     font-family: Arial, sans-serif;
     margin: 5px;
     padding: 5px;
+    width: 100%; /* Обеспечивает, что body занимает всю ширину экрана */
+    height: 100%; /* Обеспечивает, что body занимает всю высоту экрана */
     flex-direction: column; /* Делаем основное направление колонны вертикальным */
     background-image: url('/static/images/static-green.png');
 }
@@ -22,8 +24,8 @@ form {
 input[type="number"] {
     padding: 6px;
     margin-right: 6px;
-    border: 1px solid #ddd;
-    border-radius: 20px;
+    border: 1px solid #000000;
+    border-radius: 40px;
     text-align: center; /* Центрируем содержимое */
 }
 
@@ -50,13 +52,36 @@ button:hover {
   font-weight: bold;
 }
 
-.prediction-number {
-  display: inline-block;
-  padding: 5px 10px; /* Небольшой отступ вокруг текста */
+#predictions {
+  display: flex; /* Используем Flexbox для выравнивания дочерних элементов */
+  flex-wrap: nowrap; /* Запрещаем перенос элементов на новую строку */
+  overflow-x: auto; /* Добавляем горизонтальную прокрутку, если элементы не помещаются */
+  justify-content: flex-start; /* Выравниваем элементы к началу контейнера */
+  align-items: center; /* Центрируем элементы по вертикали */
+}
+
+.prediction-item {
+  display: flex; /* Для выравнивания текста и меток внутри */
+  flex-direction: column; /* Элементы внутри .prediction-item выстраиваются вертикально */
+  justify-content: center; /* Центрируем содержимое по вертикали */
+  align-items: center; /* Центрируем содержимое по горизонтали */
+  margin: 2px; /* Небольшой отступ между элементами предсказания */
+}
+
+.prediction-number, .probability {
+  display: inline-block; /* Элементы будут в одной строке внутри .prediction-item */
+  padding: 5px 5px; /* Небольшой отступ вокруг текста */
   border-radius: 20px; /* Округлённые углы */
   color: #ffffff; /* Белый цвет текста */
   font-weight: bold; /* Жирный шрифт для лучшей читаемости */
-  margin: 2px; /* Небольшой отступ между числами */
+  margin: 1px; /* Небольшой отступ между числами */
+}
+
+.label {
+  font-size: 12px; /* Меньший размер шрифта для меток */
+  padding: 2px 4px; /* Небольшой отступ вокруг меток */
+  border-radius: 10px; /* Округлённые углы для меток */
+  margin-top: 5px; /* Отступ сверху для отделения меток от чисел */
 }
 
 .green-background { background-color: #28a745; }
@@ -86,25 +111,7 @@ button:hover {
     margin-right: 10px; /* Отступ между специальными числами и основной таблицей */
 }
 
-.roulette-number.special {
-    width: 10px; /* Установите желаемую ширину */
-    height: 10px; /* Установите желаемую высоту */
-    text-align: center;
-    border: 1px solid #fff;
-    margin-bottom: 10px; /* Отступ между специальными числами */
-    background-color: green; /* Зеленый фон для специальных чисел */
-    color: white; /* Белый текст */
-}
 
-.roulette-table-container {
-  max-width: 900vw;
-  overflow: auto;
-  background-image: url('/static/images/static-green.png');
-  padding: 15px;
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-}
 
 .roulette-table {
   border-collapse: collapse;
@@ -112,12 +119,13 @@ button:hover {
 }
 
 .roulette-table td {
-  width: 14vw; /* Ширина ячеек в процентах от ширины экрана */
-  height: 6vw; /* Высота, чтобы ячейки были квадратными */
+  width: 90px; /* Ширина ячеек в процентах от ширины экрана */
+  height: 40px; /* Высота, чтобы ячейки были квадратными */
   text-align: center;
-  color: white;
-  border: 1px solid #fff;
+  color: rgba(255, 255, 255, 0.856);
+  border: 8px solid #ffffff;
   padding: 10px 0;
+  font-size: 32px; /* Размер шрифта */
 }
 
 .guessed-numbers-container {
@@ -143,36 +151,51 @@ button:hover {
 .red-background { background-color: red; }
 .black-background { background-color: black; }
 .green-background { background-color: green; }
+.green-background { background-color: orange; }
+
+.menu-container {
+  position: relative;
+}
 
 .menu-button {
-  /* Стили для кнопки меню */
   background-color: #17a2ff;
-  color: white;
+  color: rgb(255, 255, 255);
   padding: 10px;
   border: none;
   cursor: pointer;
 }
 
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  display: none; /* Изначально скрыть выпадающее меню */
+}
+
 .dropdown-menu ul {
-  /* Стили для списка в меню */
   list-style-type: none;
   padding: 0;
+  margin: 0; /* Убрать стандартные отступы */
+  display: flex;
+  flex-direction: column; /* Элементы списка в столбик */
+}
+
+.dropdown-menu ul li {
+  margin-right: 0; /* Убрать отступы между пунктами меню */
 }
 
 .dropdown-menu ul li a {
-  /* Стили для ссылок в меню */
   display: block;
   padding: 10px;
   background-color: #76ff7d00;
   text-decoration: none;
-  color: rgb(255, 255, 255);
+  color: white;
 }
 
 .dropdown-menu ul li a:hover {
-  /* Стили для ссылок при наведении */
-  background-color: #214b05ee;
+  background-color: #29580ac0;
 }
-
 
 
 body {
@@ -256,21 +279,144 @@ body {
   background-color: #008521;
   color: #ffffff;
 }
-/* Адаптация для мобильных устройств */
+
+.auth-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  border-radius: 8px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.form-actions {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.btn:last-child {
+  margin-right: 0;
+}
+
+.forgot-password {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.forgot-password a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+/* Стили для экранов шире 600px */
+@media (min-width: 600px) {
+  #predictions {
+    margin-bottom: 2px; /* Больший отступ для больших экранов */
+  }
+
+  .roulette-table-container {
+    margin-top: 2px; /* Больший отступ для больших экранов */
+  }
+}
 @media (max-width: 600px) {
-  .roulette-table td {
-      width: 14vw; /* Увеличение для мобильных устройств */
-      height: 35px; /* Сохранение квадратной формы */
+  .roulette-table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 95vh; /* Высота контейнера равна высоте видимой части экрана */
+    width: 100vw; /* Ширина контейнера равна ширине видимой части экрана */
+    overflow: hidden; /* Скрываем содержимое, выходящее за пределы контейнера */
+    margin-top: 0px; /* Меньший отступ для маленьких экранов */
   }
 
   .roulette-table {
-      min-width: 0; /* Убираем минимальную ширину для мобильных */
+    transform: rotate(90deg);
+    transform-origin: center;
+  }
+
+  .roulette-table td {
+    width: calc(100vw / 13); /* Ширина ячейки равна 1/13 ширины экрана */
+    height: 75px; /* Высота ячейки фиксирована */
+    text-align: center;
+    color: rgba(255, 255, 255, 0.514);
+    border: 8px solid #ffffff;
+    padding: 10px 0;
+    font-size: 24px;
+    box-sizing: border-box; /* Включаем границы и padding в общий размер ячейки */
+  }
+
+  .roulette-number {
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
   }
 }
+
+#predictions {
+  display: flex; /* Используем Flexbox для выравнивания дочерних элементов */
+  flex-wrap: nowrap; /* Запрещаем перенос элементов на новую строку */
+  overflow-x: auto; /* Добавляем горизонтальную прокрутку, если элементы не помещаются */
+  justify-content: flex-start; /* Выравниваем элементы к началу контейнера */
+  align-items: center; /* Центрируем элементы по вертикали */
+  margin-bottom: 0; /* Убираем отступ снизу */
+}
+
+.prediction-item {
+  display: flex; /* Для выравнивания текста и меток внутри */
+  flex-direction: column; /* Элементы внутри .prediction-item выстраиваются вертикально */
+  justify-content: center; /* Центрируем содержимое по вертикали */
+  align-items: center; /* Центрируем содержимое по горизонтали */
+  margin: 2px; /* Небольшой отступ между элементами предсказания */
+  margin-bottom: 0px; /* Уменьшаем отступ снизу */
+}
+
+.prediction-number, .probability {
+  display: inline-block; /* Элементы будут в одной строке внутри .prediction-item */
+  padding: 3px 3px; /* Небольшой отступ вокруг текста */
+  border-radius: 20px; /* Округлённые углы */
+  color: #ffffff; /* Белый цвет текста */
+  font-weight: bold; /* Жирный шрифт для лучшей читаемости */
+  margin: 1px; /* Небольшой отступ между числами */
+  font-size: 15px; /* Уменьшаем размер шрифта */
+}
+
+.label {
+  font-size: 12px; /* Меньший размер шрифта для меток */
+  padding: 1px 2px; /* Небольшой отступ вокруг меток */
+  border-radius: 10px; /* Округлённые углы для меток */
+  margin-top: 5px; /* Отступ сверху для отделения меток от чисел */
+}
+
+
 /* Стили для ячеек '0' и '00', если требуется их отличать */
 .roulette-table .green {
   background-color: #1eaa0bfd;
-  height: 60px; /* Высота для '0' и '00', если нужно отличать */
+  height: 15px; /* Высота для '0' и '00', если нужно отличать */
 }
   
   .green {
@@ -283,6 +429,10 @@ body {
   
   .black {
     background-color: #000;
+  }
+
+  .orange {
+    background-color: #ffa500;
   }
   .hsla {
     background-color: #aaff9f0c; /* Более темный оттенок зеленого для реализма */
@@ -392,25 +542,145 @@ body {
     background-color: #00630500;
 }
 
+.footer-divider {
+  border: 1px;
+  height: 4px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.027), rgba(0, 0, 0, 0.87), rgba(0, 0, 0, 0.034));
+  margin-bottom: 5px;
+}
+
 footer {
-  background-color: #4e4e4e7c;
+  background-color: #3333336c;
   color: #fff;
   text-align: center;
   padding: 20px 0;
-  margin-top: 30px;
 }
 
 .footer-content {
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
-  font-size: 0.8em;
+  font-size: 0.9em;
 }
 
 footer a {
-  color: #fd0d0d;
+  color: #ff0000;
   text-decoration: none;
 }
 
 footer a:hover {
   text-decoration: underline;
+}
+.table-number.selected {
+  background-color: #4CAF50; /* Зеленый */
+  color: rgb(0, 0, 0);
+}
+
+
+/* registration.css */
+.registration-form-container {
+  max-width: 370px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #dfdfdf6c;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.form-field {
+  margin-bottom: 15px;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-field input[type="text"],
+.form-field input[type="email"],
+.form-field input[type="password"],
+.form-field select {
+  width: 90%;
+  padding: 10px;
+  border: 2px solid #a5a5a5;
+  border-radius: 4px;
+}
+
+/* Стили для кнопки отправки формы */
+.submit-button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+/* Стили для Select2 */
+.select2-container--default .select2-selection--single {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  height: 38px;
+  padding: 4px;
+}
+/* ... */
+
+.label {
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-size: 0.8em;
+  margin-left: 4px;
+  color: rgb(0, 0, 0);
+}
+
+.hot {
+  background-color: red;
+}
+
+.new {
+  background-color: rgb(128, 126, 0);
+}
+
+.auth-container {
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.form-actions {
+  flex-direction: column;
+}
+
+.btn {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.btn:last-child {
+  margin-bottom: 0;
+}
+
+.registration-form-container {
+  box-shadow: none;
+  border-radius: 0;
+  margin: 0;
+  padding: 15px;
+}
+
+.dropdown-menu ul {
+  flex-direction: column; /* Элементы списка в столбик */
+}
+
+
+
+/* Стили для экранов шириной более 768px (например, для планшетов и десктопов) */
+@media (min-width: 768px) {
+.dropdown-menu ul {
+  flex-direction: row; /* Элементы списка в ряд */
+}
+
+.dropdown-menu ul li {
+  margin-right: 10px; /* Вернуть отступы между пунктами меню */
+}
 }

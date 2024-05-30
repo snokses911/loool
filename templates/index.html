@@ -1,125 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <title>Предсказывание Рулетки</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
-</head>
-<body>
-  <div id="loadingGifContainer" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 1000; display: flex; justify-content: center; align-items: center;">
-    <img src="static/images/loading.gif" alt="Loading...">
-</div>
+{% extends "base.html" %}
 
-<button class="menu-button">Меню</button>
-<div class="dropdown-menu" style="display: none;">
-    <ul>
-        <li><a href="/profile">Мой профиль</a></li>
-        <li><a href="/settings">Настройки</a></li>
-        <li><a href="/user_guide">Руководсво пользователя</a></li>
-        <li><a href="/faq">FAQ</a></li>
-    </ul>
-</div>
+{% block title %}Авторизация - Предсказывание Рулетки{% endblock %}
 
-    <header>
-        <h1>Предсказывание рулетки GTA 5 RP</h1>
-    </header>
-    <main>
-        <section>
-            <h2 style="text-align: center;">Введите последнее выпавшее число:</h2>
-            <input type="number" id="last-number" min="0" max="36" required>
-            <button id="cancel-last-entry">Отменить последний ввод</button>
-            <p id="predictions">Введите последнее выпавшее число...</p>
-            <div id="loadingIndicator" style="display: none;">Загрузка...</div>
-            <div id="error" style="color: rgb(255, 0, 0); display: none;">Произошла ошибка</div>
-        </section>
-        <section>
-          <h2 style="text-align: center;">Стол Рулетки</h2>
-            <div class="roulette-table-container">
+{% block content %}
+<header>
+    <h1>Проект/Сервер</h1>
+</header>
 
-                <table class="roulette-table">
-                  <tr>  
+<main>
+    <p>Уважаемый {{ username }}, для того чтобы использовать приложение, пожалуйста, выберите проект и сервер.</p>
+    <div class="selection-form-container">
+        <form id="selection-form">
+            <div class="form-field">
+                <label for="project">Проект:</label>
+                <select id="project" name="project">
+                    <option value="GTA5RP">GTA5 RP</option>
+                    <option value="Madjestic">Madjestic</option>
+                </select>
+            </div>
+            
+            <div class="form-field">
+                <label for="server">Сервер:</label>
+                <select id="server" name="server">
+                    <!-- Сервера будут добавлены динамически -->
+                </select>
+            </div>
 
-                    <td class="roulette-number green" data-number="00">00</td>
-                    <td class="roulette-number red" data-number="3">3</td>
-                    <td class="roulette-number black" data-number="6">6</td>
-                    <td class="roulette-number red" data-number="9">9</td>
-                    <td class="roulette-number red" data-number="12">12</td>
-                    <td class="roulette-number black" data-number="15">15</td>
-                    <td class="roulette-number red" data-number="18">18</td>
-                    <td class="roulette-number red" data-number="21">21</td>
-                    <td class="roulette-number black" data-number="24">24</td>
-                    <td class="roulette-number red" data-number="27">27</td>
-                    <td class="roulette-number red" data-number="30">30</td>
-                    <td class="roulette-number black" data-number="33">33</td>
-                    <td class="roulette-number red" data-number="36">36</td>
+            <div class="form-field">
+                <button type="button" id="go-to-predictions">Перейти к предсказаниям</button>
+            </div>
+        </form>
+    </div>
+</main>
+<script src="{{ url_for('static', filename='js/selection.js') }}"></script>
 
-                  </tr>
-                  <tr>
-                    <td class="roulette-number green" data-number=""></td>
-                    <td class="roulette-number black" data-number="2">2</td>
-                    <td class="roulette-number red" data-number="5">5</td>
-                    <td class="roulette-number black" data-number="8">8</td>
-                    <td class="roulette-number black" data-number="11">11</td>
-                    <td class="roulette-number red" data-number="14">14</td>
-                    <td class="roulette-number black" data-number="17">17</td>
-                    <td class="roulette-number black" data-number="20">20</td>
-                    <td class="roulette-number red" data-number="23">23</td>
-                    <td class="roulette-number black" data-number="26">26</td>
-                    <td class="roulette-number black" data-number="29">29</td>
-                    <td class="roulette-number red" data-number="32">32</td>
-                    <td class="roulette-number black" data-number="35">35</td>
-                  </tr>
-                  <tr>
-                    <td class="roulette-number green" data-number="0">0</td>
-                    <td class="roulette-number red" data-number="1">1</td>
-                    <td class="roulette-number black" data-number="4">4</td>
-                    <td class="roulette-number red" data-number="7">7</td>
-                    <td class="roulette-number black" data-number="10">10</td>
-                    <td class="roulette-number black" data-number="13">13</td>
-                    <td class="roulette-number red" data-number="16">16</td>
-                    <td class="roulette-number red" data-number="19">19</td>
-                    <td class="roulette-number black" data-number="22">22</td>
-                    <td class="roulette-number red" data-number="25">25</td>
-                    <td class="roulette-number black" data-number="28">28</td>
-                    <td class="roulette-number black" data-number="31">31</td>
-                    <td class="roulette-number red" data-number="34">34</td>
-
-                  </tr>
-                </table>
-        </section>
-
-
-
-    </main>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var rouletteNumbers = document.querySelectorAll('.roulette-number');
-
-            rouletteNumbers.forEach(function (number) {
-                number.addEventListener('click', function () {
-                    var lastNumberInput = document.getElementById('last-number');
-                    lastNumberInput.value = this.dataset.number;
-                    // Отправляем форму автоматически после выбора числа
-                    lastNumberInput.form.submit();
-                });
-            });
-        });
-    </script>
-    <script>
-      window.onload = function() {
-          // Скрываем GIF анимацию загрузки
-          document.getElementById('loadingGifContainer').style.display = 'none';
-      };
-      </script>
-      
-</body>
-<footer>
-  <div class="footer-content">
-      <p>Важно: Все предсказания, сделанные приложением "Предсказатель рулетки для GTA5 RP", предназначены исключительно для развлекательных целей. Мы не несем ответственности за любые потери или ущерб, возникшие в результате использования этих предсказаний в реальной игре или казино.</p>
-      <p>Если у вас есть вопросы или предложения, пожалуйста, свяжитесь с нами через наш Discord сервер: <a href="https://discord.gg/j6EVTYwB9z" target="_blank">Присоединиться к Discord</a>.</p>
-  </div>
-</footer>
-</html>
+{% endblock %}

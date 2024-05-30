@@ -1,27 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <title>FAQ - Предсказывание Рулетки</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
-</head>
-<body>
-  <div id="loadingGifContainer" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 1000; display: flex; justify-content: center; align-items: center;">
-    <img src="static/images/loading.gif" alt="Loading...">
-</div>
+{% extends "base.html" %}
 
-<button class="menu-button">Меню</button>
-<div class="dropdown-menu" style="display: none;">
-    <ul>
-        <li><a href="/profile">Мой профиль</a></li>
-        <li><a href="/settings">Настройки</a></li>
-        <li><a href="/user_guide">Руководсво пользователя</a></li>
-        <li><a href="/">Предсказывание рулетки</a></li>
-    </ul>
-</div>
+{% block title %}Авторизация - Предсказывание Рулетки{% endblock %}
 
+{% block content %}
 <header>
     <h1>Часто задаваемые вопросы (FAQ)</h1>
 </header>
@@ -66,21 +47,5 @@
         </dl>
     </section>
 </main>
-
-    
-
-    <script>
-        window.onload = function() {
-            // Скрываем GIF анимацию загрузки
-            document.getElementById('loadingGifContainer').style.display = 'none';
-        };
-        </script>
-        
-  </body>
-  <footer>
-    <div class="footer-content">
-        <p>Важно: Все предсказания, сделанные приложением "Предсказатель рулетки для GTA5 RP", предназначены исключительно для развлекательных целей. Мы не несем ответственности за любые потери или ущерб, возникшие в результате использования этих предсказаний в реальной игре или казино.</p>
-        <p>Если у вас есть вопросы или предложения, пожалуйста, свяжитесь с нами через наш Discord сервер: <a href="https://discord.gg/j6EVTYwB9z" target="_blank">Присоединиться к Discord</a>.</p>
-    </div>
-</footer>
-  </html>
+<script src="{{ url_for('static', filename='js/faq.js') }}"></script>
+{% endblock %}

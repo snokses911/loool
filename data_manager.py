@@ -18,19 +18,25 @@ def create_table():
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             number TEXT NOT NULL,
             timestamp TEXT NOT NULL,
-            username TEXT
+            username TEXT,
+            table_number INTEGER
         );
     ''')
     conn.commit()
     conn.close()
 
-def insert_number(number, username):
-    """Вставляет число, текущее время и имя пользователя в базу данных."""
+def insert_number(number, username, table_number=None):
+    """Вставляет число, текущее время, имя пользователя и номер стола в базу данных."""
     conn = connect_db()
     cursor = conn.cursor()
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    cursor.execute('INSERT INTO roulette_numbers (number, timestamp, username) VALUES (?, ?, ?)',
-                   (str(number), timestamp, username))
+    # Проверяем, передан ли номер стола, и в зависимости от этого формируем SQL запрос
+    if table_number is not None:
+        cursor.execute('INSERT INTO roulette_numbers (number, timestamp, username, table_number) VALUES (?, ?, ?, ?)',
+                       (str(number), timestamp, username, table_number))
+    else:
+        cursor.execute('INSERT INTO roulette_numbers (number, timestamp, username) VALUES (?, ?, ?)',
+                       (str(number), timestamp, username))
     conn.commit()
     conn.close()
 
@@ -66,7 +72,7 @@ def get_following_numbers(target_number):
     return filtered_numbers, True  # Возвращает список следующих чисел и True, если данных достаточно
 
 
-def delete_last_entry():
+def cancel_last_entry():
     conn = connect_db()
     cursor = conn.cursor()
     # Получаем последние две записи
@@ -88,7 +94,5 @@ def delete_last_entry():
     else:
         conn.close()
         return {"status": "error", "message": "No entries to delete."}
-
-
 if __name__ == "__main__":
     create_table()

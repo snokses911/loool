@@ -1,0 +1,34 @@
+{
+  "extends": [
+    "development"
+  ],
+  "hints": {
+    "disown-opener": "off",
+    "no-inline-styles": "off",
+    "axe/forms": [
+      "default",
+      {
+        "label": "off"
+      }
+    ],
+    "compat-api/css": [
+      "default",
+      {
+        "ignore": [
+          "Roboto"
+        ]
+      }
+    ]
+  },
+  "browserslist": [
+    "defaults",
+    "not ie 11",
+    "not and_chr <= 124",
+    "not and_ff <= 125",
+    "not chrome <= 124",
+    "not edge <= 124",
+    "not firefox <= 125",
+    "not opera <= 109",
+    "not samsung <= 24"
+  ]
+}
