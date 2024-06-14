@@ -1,0 +1,9 @@
+flask
+numpy
+pandas
+requests
+gunicorn
+pymongo
+Flask-SQLAlchemy
+Flask-Login
+Flask-Bcrypt
